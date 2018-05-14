@@ -58,6 +58,13 @@ cp "$VM1_HDD" "$VM2_HDD"
 # Create two disks from image
 mkisofs -o "$VM1_CONFIG_ISO" -V cidata -r -J --quiet ${dir_pwd}/config-drives/vm1-config/
 mkisofs -o "$VM2_CONFIG_ISO" -V cidata -r -J --quiet ${dir_pwd}/config-drives/vm2-config/
+# Create network
+virsh net-define ${dir_pwd}/networks/external.xml
+virsh net-define ${dir_pwd}/networks/internal.xml
+virsh net-define ${dir_pwd}/networks/management.xml
+virsh net-start external
+virsh net-start internal
+virsh net-start management
 # Create  VM1
 virt-install \
 --connect qemu:///system \
