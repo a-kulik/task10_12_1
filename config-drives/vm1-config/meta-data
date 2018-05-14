@@ -1,0 +1,20 @@
+hostname: vm_name
+local-hostname: vm_name
+network-interfaces: |
+  auto ext_int
+  iface ext_int inet dhcp
+  dns-nameservers dns_vm
+  
+  auto inter_int
+  iface inter_int inet static
+  address inter_ip
+  network inter_net
+  netmask inter_mask
+  broadcast inter_broad
+  
+  auto manag_int
+  iface manag_int inet static
+  address manag_ip
+  network manag_net
+  netmask manag_mask
+  broadcast manag_broad

@@ -1,0 +1,4 @@
+<network>
+  <name>network_name</name>
+  <ip address='br_ip' netmask='net_mask'/>
+</network>
