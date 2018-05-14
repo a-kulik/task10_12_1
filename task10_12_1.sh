@@ -43,6 +43,16 @@ runcmd:
  - sysctl -p > /dev/null
  - iptables -t nat -A POSTROUTING --out-interface ext_int -j MASQUERADE
  - iptables -A FORWARD --in-interface inter_int -j ACCEPT
+ - apt-get update
+ - apt-get install apt-transport-https ca-certificates curl software-properties-common -y
+ - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+ - apt-key fingerprint 0EBFCD88
+ - add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+ - apt-get update
+ - apt-get install docker-ce -y
+ - ip link add $VXLAN_IF type vxlan id $VID remote $VM2_INTERNAL_IP local VM1_INTERNAL_IP dstport 4789
+ - ip link set vxlan0 up
+ - ip addr add
 EOF
 sed -i "s@ext_int@$VM1_EXTERNAL_IF@" ${dir_pwd}/config-drives/vm1-config/user-data
 sed -i "s@inter_int@$VM1_INTERNAL_IF@" ${dir_pwd}/config-drives/vm1-config/user-data
@@ -68,6 +78,13 @@ ssh_authorized_keys:
  - $pub_key
 runcmd:
  - ip route add default via gw_ip dev gw_dev
+ - apt-get update
+ - apt-get install apt-transport-https ca-certificates curl software-properties-common -y
+ - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+ - apt-key fingerprint 0EBFCD88
+ - add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+ - apt-get update
+ - apt-get install docker-ce -y 
 EOF
 sed -i "s@gw_ip@$VM1_INTERNAL_IP@" ${dir_pwd}/config-drives/vm2-config/user-data
 sed -i "s@gw_dev@$VM2_INTERNAL_IF@" ${dir_pwd}/config-drives/vm2-config/user-data
