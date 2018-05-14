@@ -4,4 +4,4 @@ chpasswd: { expire: False }
 ssh_authorized_keys:
  - ssh_pub_key
 runcmd:
- - [ ip, route, add, default, via, gw_ip, dev, gw_dev ]
+ - ip route add default via gw_ip dev gw_dev
