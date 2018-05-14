@@ -15,7 +15,7 @@ sed -i "s@network_name@$INTERNAL_NET_NAME@" ${dir_pwd}/networks/internal.xml
 # management network
 sed -i "s@network_name@$MANAGEMENT_NET_NAME@" ${dir_pwd}/networks/management.xml
 sed -i "s@br_ip@$MANAGEMENT_HOST_IP@" ${dir_pwd}/networks/management.xml
-sed -i "s@net_name@$MANAGEMENT_NET_MASK@" ${dir_pwd}/networks/management.xml
+sed -i "s@net_mask@$MANAGEMENT_NET_MASK@" ${dir_pwd}/networks/management.xml
 # VM1 meta-data
 sed -i "s@vm_name@$VM1_NAME@" ${dir_pwd}/config-drives/vm1-config/meta-data
 sed -i "s@ext_int@$VM1_EXTERNAL_IF@" ${dir_pwd}/config-drives/vm1-config/meta-data
