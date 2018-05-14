@@ -88,7 +88,7 @@ virt-install \
 --ram $VM2_MB_RAM --vcpus=$VM2_NUM_CPU --$VM_TYPE \
 --os-type=linux --os-variant=ubuntu16.04 \
 --disk path="$VM2_HDD",format=qcow2,bus=virtio,cache=none \
---disk path="$VM1_CONFIG_ISO",device=cdrom \
+--disk path="$VM2_CONFIG_ISO",device=cdrom \
 --network network=$INTERNAL_NET_NAME \
 --network network=$MANAGEMENT_NET_NAME \
 --graphics vnc,port=-1 \
