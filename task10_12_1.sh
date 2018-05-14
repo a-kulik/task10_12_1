@@ -31,7 +31,8 @@ sed -i "s@manag_mask@$MANAGEMENT_NET_MASK@" ${dir_pwd}/config-drives/vm1-config/
 sed -i "s@manag_broad@${MANAGEMENT_NET}.255@" ${dir_pwd}/config-drives/vm1-config/meta-data
 sed -i "s@dns_vm@$VM_DNS@" ${dir_pwd}/config-drives/vm1-config/meta-data
 # VM1 user-data
-sed -i "s@ssh_pub_key@$\"(cat $SSH_PUB_KEY)\"@" ${dir_pwd}/config-drives/vm1-config/user-data
+pub_key=$(cat $SSH_PUB_KEY)
+sed -i "s@ssh_pub_key@$pub_key@" ${dir_pwd}/config-drives/vm1-config/user-data
 sed -i "s@ext_int@$VM1_EXTERNAL_IF@" ${dir_pwd}/config-drives/vm1-config/user-data
 sed -i "s@inter_int@$VM1_INTERNAL_IF@" ${dir_pwd}/config-drives/vm1-config/user-data
 # VM2 meta-data
