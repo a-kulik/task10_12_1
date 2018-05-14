@@ -4,7 +4,7 @@ chpasswd: { expire: False }
 ssh_authorized_keys:
  - ssh_pub_key
 runcmd:
- - [ sed, -i, 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/', /etc/sysctl.conf ]
- - [ sysctl, -p, >, /dev/null ]
- - [ iptables, -t, nat, -A, POSTROUTING, --out-interface, ext_int, -j, MASQUERADE ]
- - [ iptables, -A, FORWARD, --in-interface, inter_int, -j, ACCEPT ]
+ - sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/' /etc/sysctl.conf
+ - sysctl -p > /dev/null
+ - iptables -t nat -A POSTROUTING --out-interface ext_int -j MASQUERADE
+ - iptables -A FORWARD --in-interface inter_int -j ACCEPT
