@@ -53,6 +53,11 @@ cp "$VM1_HDD" "$VM2_HDD"
 # Create two disks from image
 mkisofs -o "$VM1_CONFIG_ISO" -V cidata -r -J --quiet ${dir_pwd}/config-drives/vm1-config/
 mkisofs -o "$VM2_CONFIG_ISO" -V cidata -r -J --quiet ${dir_pwd}/config-drives/vm2-config/
+# Chek folder
+mkdir -p $(echo "$VM1_HDD" |rev| cut -d / -f2- | rev)
+mkdir -p $(echo "$VM2_HDD" |rev| cut -d / -f2- | rev)
+mkdir -p $(echo "$VM1_CONFIG_ISO" |rev| cut -d / -f2- | rev)
+mkdir -p $(echo "$VM2_CONFIG_ISO" |rev| cut -d / -f2- | rev)
 # Create  VM1
 virt-install \
 --connect qemu:///system \
