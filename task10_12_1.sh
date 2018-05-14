@@ -32,7 +32,18 @@ sed -i "s@manag_broad@${MANAGEMENT_NET}.255@" ${dir_pwd}/config-drives/vm1-confi
 sed -i "s@dns_vm@$VM_DNS@" ${dir_pwd}/config-drives/vm1-config/meta-data
 # VM1 user-data
 pub_key=$(cat $SSH_PUB_KEY)
-sed -i "s@ssh_pub_key@$pub_key@" ${dir_pwd}/config-drives/vm1-config/user-data
+cat << EOF > ${dir_pwd}/config-drives/vm1-config/user-data
+#cloud-config
+password: qwerty
+chpasswd: { expire: False }
+ssh_authorized_keys:
+ - $pub_key
+runcmd:
+ - sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/' /etc/sysctl.conf
+ - sysctl -p > /dev/null
+ - iptables -t nat -A POSTROUTING --out-interface ext_int -j MASQUERADE
+ - iptables -A FORWARD --in-interface inter_int -j ACCEPT
+EOF
 sed -i "s@ext_int@$VM1_EXTERNAL_IF@" ${dir_pwd}/config-drives/vm1-config/user-data
 sed -i "s@inter_int@$VM1_INTERNAL_IF@" ${dir_pwd}/config-drives/vm1-config/user-data
 # VM2 meta-data
