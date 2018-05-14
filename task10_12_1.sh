@@ -29,7 +29,7 @@ sed -i "s@manag_ip@$VM1_MANAGEMENT_IP@" ${dir_pwd}/config-drives/vm1-config/meta
 sed -i "s@manag_net@${MANAGEMENT_NET}.0@" ${dir_pwd}/config-drives/vm1-config/meta-data
 sed -i "s@manag_mask@$MANAGEMENT_NET_MASK@" ${dir_pwd}/config-drives/vm1-config/meta-data
 sed -i "s@manag_broad@${MANAGEMENT_NET}.255@" ${dir_pwd}/config-drives/vm1-config/meta-data
-sed -i "s@dns_vmd@$VM_DNS@" ${dir_pwd}/config-drives/vm1-config/meta-data
+sed -i "s@dns_vm@$VM_DNS@" ${dir_pwd}/config-drives/vm1-config/meta-data
 # VM1 user-data
 sed -i "s@ssh_pub_key@$(cat $SSH_PUB_KEY)@" ${dir_pwd}/config-drives/vm1-config/user-data
 # VM2 meta-data
@@ -44,7 +44,7 @@ sed -i "s@manag_ip@$VM2_MANAGEMENT_IP@" ${dir_pwd}/config-drives/vm2-config/meta
 sed -i "s@manag_net@${MANAGEMENT_NET}.0@" ${dir_pwd}/config-drives/vm2-config/meta-data
 sed -i "s@manag_mask@$MANAGEMENT_NET_MASK@" ${dir_pwd}/config-drives/vm2-config/meta-data
 sed -i "s@manag_broad@${MANAGEMENT_NET}.255@" ${dir_pwd}/config-drives/vm2-config/meta-data
-sed -i "s@dns_vmd@$VM_DNS@" ${dir_pwd}/config-drives/vm2-config/meta-data
+sed -i "s@dns_vm@$VM_DNS@" ${dir_pwd}/config-drives/vm2-config/meta-data
 # VM2 user-data
 sed -i "s@ssh_pub_key@$(cat $SSH_PUB_KEY)@" ${dir_pwd}/config-drives/vm2-config/user-data
 # Chek folder
