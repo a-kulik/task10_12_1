@@ -1,7 +1,7 @@
 hostname: vm_name
 local-hostname: vm_name
 network-interfaces: |
-   
+  
   auto inter_int
   iface inter_int inet static
   address inter_ip
