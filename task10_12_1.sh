@@ -39,7 +39,6 @@ chpasswd: { expire: False }
 ssh_authorized_keys:
  - $pub_key
 runcmd:
- - sudo su
  - sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/' /etc/sysctl.conf
  - sysctl -p > /dev/null
  - iptables -t nat -A POSTROUTING --out-interface $VM1_EXTERNAL_IF -j MASQUERADE
@@ -78,8 +77,7 @@ chpasswd: { expire: False }
 ssh_authorized_keys:
  - $pub_key
 runcmd:
- - sudo su
- - ip route add default via gw_ip dev gw_dev
+ - ip route add default via $VM1_INTERNAL_IP dev $VM2_INTERNAL_IF
  - apt-get update
  - apt-get install apt-transport-https ca-certificates curl software-properties-common -y
  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
