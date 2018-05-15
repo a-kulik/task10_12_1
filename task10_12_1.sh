@@ -50,7 +50,7 @@ runcmd:
  - add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
  - apt-get update
  - apt-get install docker-ce -y
- - ip link add $VXLAN_IF type vxlan id $VID remote $VM2_INTERNAL_IP local VM1_INTERNAL_IP dstport 4789
+ - ip link add $VXLAN_IF type vxlan id $VID remote $VM2_INTERNAL_IP local $VM1_INTERNAL_IP dstport 4789
  - ip link set $VXLAN_IF up
  - ip addr add $VM1_VXLAN_IP dev $VXLAN_IF
 EOF
@@ -85,7 +85,7 @@ runcmd:
  - add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
  - apt-get update
  - apt-get install docker-ce -y
- - ip link add $VXLAN_IF type vxlan id $VID remote $VM1_INTERNAL_IP local VM2_INTERNAL_IP dstport 4789
+ - ip link add $VXLAN_IF type vxlan id $VID remote $VM1_INTERNAL_IP local $VM2_INTERNAL_IP dstport 4789
  - ip link set $VXLAN_IF up
  - ip addr add $VM2_VXLAN_IP dev $VXLAN_IF
 EOF
