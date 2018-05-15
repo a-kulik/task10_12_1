@@ -52,7 +52,7 @@ runcmd:
  - apt-get install docker-ce -y
  - ip link add $VXLAN_IF type vxlan id $VID remote $VM2_INTERNAL_IP local $VM1_INTERNAL_IP dstport 4789
  - ip link set $VXLAN_IF up
- - ip addr add $VM1_VXLAN_IP dev $VXLAN_IF
+ - ip addr add ${VM1_VXLAN_IP}/24 dev $VXLAN_IF
 EOF
 sed -i "s@ext_int@$VM1_EXTERNAL_IF@" ${dir_pwd}/config-drives/vm1-config/user-data
 sed -i "s@inter_int@$VM1_INTERNAL_IF@" ${dir_pwd}/config-drives/vm1-config/user-data
@@ -87,7 +87,7 @@ runcmd:
  - apt-get install docker-ce -y
  - ip link add $VXLAN_IF type vxlan id $VID remote $VM1_INTERNAL_IP local $VM2_INTERNAL_IP dstport 4789
  - ip link set $VXLAN_IF up
- - ip addr add $VM2_VXLAN_IP dev $VXLAN_IF
+ - ip addr add ${VM2_VXLAN_IP}/24 dev $VXLAN_IF
 EOF
 sed -i "s@gw_ip@$VM1_INTERNAL_IP@" ${dir_pwd}/config-drives/vm2-config/user-data
 sed -i "s@gw_dev@$VM2_INTERNAL_IF@" ${dir_pwd}/config-drives/vm2-config/user-data
