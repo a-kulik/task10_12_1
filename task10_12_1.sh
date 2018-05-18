@@ -54,8 +54,6 @@ runcmd:
  - ip link set $VXLAN_IF up
  - ip addr add ${VM1_VXLAN_IP}/24 dev $VXLAN_IF
 EOF
-sed -i "s@ext_int@$VM1_EXTERNAL_IF@" ${dir_pwd}/config-drives/vm1-config/user-data
-sed -i "s@inter_int@$VM1_INTERNAL_IF@" ${dir_pwd}/config-drives/vm1-config/user-data
 # VM2 meta-data
 sed -i "s@vm_name@$VM2_NAME@" ${dir_pwd}/config-drives/vm2-config/meta-data
 sed -i "s@inter_int@$VM2_INTERNAL_IF@" ${dir_pwd}/config-drives/vm2-config/meta-data
@@ -89,8 +87,6 @@ runcmd:
  - ip link set $VXLAN_IF up
  - ip addr add ${VM2_VXLAN_IP}/24 dev $VXLAN_IF
 EOF
-sed -i "s@gw_ip@$VM1_INTERNAL_IP@" ${dir_pwd}/config-drives/vm2-config/user-data
-sed -i "s@gw_dev@$VM2_INTERNAL_IF@" ${dir_pwd}/config-drives/vm2-config/user-data
 # Chek folder
 mkdir -p $(echo "$VM1_HDD" |rev| cut -d / -f2- | rev)
 mkdir -p $(echo "$VM2_HDD" |rev| cut -d / -f2- | rev)
